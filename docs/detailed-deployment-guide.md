@@ -10,7 +10,7 @@
     - (Optional) Sort key: category (String).
     - Table settings: Leave default settings for now (on-demand capacity, no secondary indexes initially).
     - Click *Create table*.
-![Create DynamoDB Table](/visual-guides/1.dynamodb-table.png)
+![Create DynamoDB Table](visual-guides/1.dynamodb-table.png)
 
 ## Phase 2: Lambda Function Creation (Python)
  - Access Lambda Console:
@@ -25,7 +25,7 @@
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
     - Click *Create function*.
-![Lambda Post Function](/visual-guides/2.lambda-post.png)
+![Lambda Post Function](visual-guides/2.lambda-post.png)
  - Configure Function Code for each Lambda (Python):
     - Once the function is created, you'll be on its configuration page.
     - Scroll down to the "Code source" section.
@@ -124,7 +124,7 @@ def lambda_handler(event, context):
             'body': json.dumps(f"Internal server error: {str(e)}")
         } 
 ```
-![Lambda Post Code](/visual-guides/2.post-code.png)
+![Lambda Post Code](visual-guides/2.post-code.png)
 
 ### `getproductfunction` (GET)
 
@@ -136,7 +136,7 @@ def lambda_handler(event, context):
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
     - Click *Create function*.
-![Lambda Get Code](/visual-guides/2.lambda-get.png)
+![Lambda Get Code](visual-guides/2.lambda-get.png)
  - Configure Function Code for each Lambda (Python):
     - Once the function is created, you'll be on its configuration page.
     - Scroll down to the "Code source" section.
@@ -221,7 +221,7 @@ def lambda_handler(event, context):
             'body': json.dumps(f'Internal server error: {str(e)}')
         }
 ```
-![Lambda Get Code](/visual-guides/2.get-code.png)
+![Lambda Get Code](visual-guides/2.get-code.png)
 
 ### `updateproductfunction` (PUT)
 
@@ -233,7 +233,7 @@ def lambda_handler(event, context):
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
     - Click *Create function *.
-![Lambda Put Function](/visual-guides/2.lambda-put.png)
+![Lambda Put Function](visual-guides/2.lambda-put.png)
  - Configure Function Code for each Lambda (Python):
     - Once the function is created, you'll be on its configuration page.
     - Scroll down to the "Code source" section.
@@ -384,7 +384,7 @@ def lambda_handler(event, context):
             'body': json.dumps(f'Internal server error: {str(e)}')
         }
 ```
-![Lambda Put Code](/visual-guides/2.put-code.png)
+![Lambda Put Code](visual-guides/2.put-code.png)
 
 ### `deleteproductfunction` (DELETE)
 
@@ -396,7 +396,7 @@ def lambda_handler(event, context):
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
     - Click *Create function*.
-![Lambda Delete Function](/visual-guides/2.lambda-delete.png)
+![Lambda Delete Function](visual-guides/2.lambda-delete.png)
  - Configure Function Code for each Lambda (Python):
     - Once the function is created, you'll be on its configuration page.
     - Scroll down to the "Code source" section.
@@ -455,7 +455,7 @@ def lambda_handler(event, context):
             'body': json.dumps(f'Internal server error: {str(e)}')
         }
 ```
-![Lambda Delete Function](/visual-guides/2.delete-code.png)
+![Lambda Delete Function](visual-guides/2.delete-code.png)
 
 ## Phase 3: IAM Permissions
 
@@ -478,7 +478,7 @@ Modify the execution roles for the Lambda functions.
         - Click *Add ARN* under table.
         - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
         - Leave indexes ARN blank 
-![Post Role](/visual-guides/3.post.policy.png)
+![Post Role](visual-guides/3.post.policy.png)
     - Click *Review policy*.
     - Policy name: `createProductFunction`
     - Click *Create policy*.
@@ -498,7 +498,7 @@ Modify the execution roles for the Lambda functions.
         - Click *Add ARN* under table.
         - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
         - Leave indexes ARN blank 
-![Get Role](/visual-guides/3.get.policy.png)
+![Get Role](visual-guides/3.get.policy.png)
     - Click *Review policy*.
     - Policy name: `getProductfunction`
     - Click *Create policy*.
@@ -518,7 +518,7 @@ Modify the execution roles for the Lambda functions.
         - Click *Add ARN* under table.
         - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
         - Leave indexes ARN blank 
-![Put Role](/visual-guides/3.put.policy.png)
+![Put Role](visual-guides/3.put.policy.png)
     - Click *Review policy*.
     - Policy name: `updateProductfunction`
     - Click *Create policy*.
@@ -538,7 +538,7 @@ Modify the execution roles for the Lambda functions.
         - Click *Add ARN* under table.
         - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
         - Leave indexes ARN blank 
-![Post Role](/visual-guides/3.delete.policy.png)
+![Post Role](visual-guides/3.delete.policy.png)
     - Click *Review policy*.
     - Policy name: `getProductfunction`
     - Click *Create policy*.
@@ -555,7 +555,7 @@ Modify the execution roles for the Lambda functions.
     - API name: `ProductsAPI`.
     - Endpoint Type: "Regional".
     - Click *Create API*.
-![Create API](/visual-guides/4.create-api.png)
+![Create API](visual-guides/4.create-api.png)
  - Create Resources and Methods:
     - Create Resource (/products):
        - From the API Gateway console, select the ProductsAPI.
@@ -563,7 +563,7 @@ Modify the execution roles for the Lambda functions.
        - Resource Name: products
        - Resource Path: products
        - Click *Create Resource*.
-![Create Products](/visual-guides/4.create-products.png)
+![Create Products](visual-guides/4.create-products.png)
  - Create Method (POST for /products):
        - Select the /products resource.
        - Click *Actions* -> *Create Method*.
@@ -572,7 +572,7 @@ Modify the execution roles for the Lambda functions.
        - Lambda Region: Select the AWS region.
        - Lambda Function: Start typing `createProductFunction` and select it.
        - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
-![Create POST Method](/visual-guides/4.post-method.png)
+![Create POST Method](visual-guides/4.post-method.png)
  - Create Resource (/{productId} under /products):
        - Select the /products resource.
        - Click *Actions* -> "Create Resource".
@@ -586,7 +586,7 @@ Modify the execution roles for the Lambda functions.
        - Lambda Region: Select the AWS region.
        - Lambda Function: Start typing `getProductFunction` and select it.
        - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
-![GET Method](/visual-guides/4.get-method.png)
+![GET Method](visual-guides/4.get-method.png)
  - Create PUT for /{productId}:
        - Click *Actions* -> *Create Method*.
        - Select PUT from the dropdown.
@@ -594,7 +594,7 @@ Modify the execution roles for the Lambda functions.
        - Lambda Region: Select the AWS region.
        - Lambda Function: Start typing `updateProductFunction` and select it.
        - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
-![PUT Method](/visual-guides/4.put-method.png)
+![PUT Method](visual-guides/4.put-method.png)
  - Create DELETE for /{productId}:
        - Click *Actions* -> *Create Method*.
        - Select DELETE from the dropdown.
@@ -602,9 +602,9 @@ Modify the execution roles for the Lambda functions.
        - Lambda Region: Select the AWS region.
        - Lambda Function: Start typing `deleteProductFunction` and select it.
        - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
-![DELETE Method](/visual-guides/4.delete-method.png)
+![DELETE Method](visual-guides/4.delete-method.png)
 
-![All Methods](/visual-guides/4.created-methods.png)
+![All Methods](visual-guides/4.created-methods.png)
 
  - Deploy API:
        - From the API Gateway console, select the ProductsAPI.
@@ -613,7 +613,7 @@ Modify the execution roles for the Lambda functions.
        - Stage name: dev
        - Click *Deploy*.
        - Note down the "Invoke URL" for the API. This is the base URL you will use to test the API.
-![Deploy API](/visual-guides/4.deploy-api.png)
+![Deploy API](visual-guides/4.deploy-api.png)
 
 
 ## Phase 5: Testing and Validation
@@ -626,7 +626,7 @@ Modify the execution roles for the Lambda functions.
     - Development stage: dev.
     - Security: IAM.
     - Click *Add*
-![Add Trigger](/visual-guides/5.add-trigger.png)
+![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
     - Click the *Test* tab.
     - Create new event.
@@ -646,11 +646,11 @@ Modify the execution roles for the Lambda functions.
 ```
  - If Successful (DynamoDB):
     - You should have a new entry in the DynamoDB table.
-![POST Success DynamoDB](/visual-guides/5.dynamodb-post-success.png)
+![POST Success DynamoDB](visual-guides/5.dynamodb-post-success.png)
     - You should receive this response.
  - If successful (API Gateway):
     - You should receive a status code `200`.
-![POST Success API Gateway](/visual-guides/5.post-test-success.png)
+![POST Success API Gateway](visual-guides/5.post-test-success.png)
 
 
  - Test `getProductFunction`:
@@ -661,7 +661,7 @@ Modify the execution roles for the Lambda functions.
     - Development stage: dev.
     - Security: IAM.
     - Click *Add*
-![Add Trigger](/visual-guides/5.add-trigger.png)
+![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
     - Click the *Test* tab.
     - Create new event.
@@ -679,7 +679,7 @@ Modify the execution roles for the Lambda functions.
 ```
  - If successful:
     - You should receive a status code `200`.
-![POST Success API Gateway](/visual-guides/5.get-test-success.png)
+![POST Success API Gateway](visual-guides/5.get-test-success.png)
 
 
  - Test `updateProductFunction`:
@@ -690,7 +690,7 @@ Modify the execution roles for the Lambda functions.
     - Development stage: dev.
     - Security: IAM.
     - Click *Add*
-![Add Trigger](/visual-guides/5.add-trigger.png)
+![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
     - Click the *Test* tab.
     - Create new event.
@@ -712,11 +712,11 @@ Modify the execution roles for the Lambda functions.
 ```
  - If Successful (DynamoDB):
     - You should have a new entry in the DynamoDB table.
-![POST Success DynamoDB](/visual-guides/5.dynamodb-put-success.png)
+![POST Success DynamoDB](visual-guides/5.dynamodb-put-success.png)
     - You should receive this response.
  - If successful (API Gateway):
     - You should receive a status code `200`.
-![POST Success API Gateway](/visual-guides/5.put-test-success.png)
+![POST Success API Gateway](visual-guides/5.put-test-success.png)
 
 
 
@@ -728,7 +728,7 @@ Modify the execution roles for the Lambda functions.
     - Development stage: dev.
     - Security: IAM.
     - Click *Add*
-![Add Trigger](/visual-guides/5.add-trigger.png)
+![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
     - Click the *Test* tab.
     - Create new event.
@@ -746,11 +746,11 @@ Modify the execution roles for the Lambda functions.
 ```
  - If Successful (DynamoDB):
     - You should have a new entry in the DynamoDB table.
-![POST Success DynamoDB](/visual-guides/5.dynamodb-delete-success.png)
+![POST Success DynamoDB](visual-guides/5.dynamodb-delete-success.png)
     - You should receive this response.
  - If successful (API Gateway):
     - You should receive a status code `200`.
-![POST Success API Gateway](/visual-guides/5.delete-test-success.png)
+![POST Success API Gateway](visual-guides/5.delete-test-success.png)
 
 
 
@@ -766,7 +766,7 @@ CloudWatch logging is automatically configured when you create a Lambda function
     - In the left navigation pane, under "Logs", click "Log groups".
     - You will see log groups for the Lambda functions (e.g., /aws/lambda/`createproductfunction`).
     - Click on a log group to see the log streams, which contain the output from the Lambda function's executions (including print statements or errors).
-![CloudWatch Logs](/visual-guides/6.cloudwatch-logs.png)
+![CloudWatch Logs](visual-guides/6.cloudwatch-logs.png)
 
 
 ## Phase 7: Add Cognito for User Authentication
@@ -780,7 +780,7 @@ This phase significantly enhances the "Secure" aspect of the project by integrat
     - Name: `ProductsWebAppClient`.
     - Configure Options: Select Username.
     - Required attributes: email .
-![Create User Pool](/visual-guides/7.create-user-pools.png)
+![Create User Pool](visual-guides/7.create-user-pools.png)
  - Return to Cognito and select the newly created user pool.
     - Click *Rename*.
     - Name: `secure-serverless-app` 
@@ -791,7 +791,7 @@ This phase significantly enhances the "Secure" aspect of the project by integrat
     - Click *edit*.
     - Enable "Sign in with username and password: ALLOW_USER_PASSWORD_AUTH"
     - Click *Save changes*
-[Enable Password Auth](/visual-guides/7.enable-password-auth.png)
+[Enable Password Auth](visual-guides/7.enable-password-auth.png)
 
  - Integrate Cognito with API Gateway
   - Create a Cognito Authorizer:
@@ -803,13 +803,13 @@ This phase significantly enhances the "Secure" aspect of the project by integrat
     - Cognito User Pool: Select the user pool created in the previous step from the dropdown.
     - Token Source: Enter Authorization.
     - Click *Create*.
-![Create Authoriser](/visual-guides/7.authoriser.png)
+![Create Authoriser](visual-guides/7.authoriser.png)
    Apply Authorizer to API Methods:
     - Select the POST method on /products.
     - Click on *Method Request*.
     - For "Authorization," select the CognitoUserAuth authorizer.
     - Click *save*.
-![Authoriser POST](/visual-guides/7.authoriser-post.png)
+![Authoriser POST](visual-guides/7.authoriser-post.png)
    
    Deploy API:
     - In API Gateway, navigate to Resources.
@@ -942,21 +942,21 @@ Use the AWS Command Line Interface (CLI) to simulate user interactions with Cogn
    - Execute the following command in the terminal, replacing placeholders with the actual values:
 
 `aws cognito-idp sign-up --region eu-west-2 --client-id` <ProductsWebAppClient Client ID> `--username testuser --password MySecurePass1! --user-attributes Name="email",Value="testuser@example.com"`
-![Create User](/visual-guides/7.create-user.png)
+![Create User](visual-guides/7.create-user.png)
 
-![Unconfirmed Created User](/visual-guides/7.unconfirmed-user.png)
+![Unconfirmed Created User](visual-guides/7.unconfirmed-user.png)
 
 ### Confirm the User:
 To bypass email verification for testing, use admin-confirm-sign-up:
 
 `aws cognito-idp admin-confirm-sign-up --region eu-west-2 --user-pool-id` <COGNITO_USER_POOL_ID> `--username testuser`
-![Confirmed Created User](/visual-guides/7.confirmed-user.png)
+![Confirmed Created User](visual-guides/7.confirmed-user.png)
 
 ### Sign in and get the required tokens. The output will contain an AuthenticationResult. Copy the value of IdToken. This is the JSON web token.
 `aws cognito-idp initiate-auth --region eu-west-2 --auth-flow USER_PASSWORD_AUTH --client-id` <APP_Client_ID> `--auth-parameters USERNAME=testuser,PASSWORD=MySecurePass1!`
 
  - The output will contain an AuthenticationResult. Copy the value of IdToken. This is the JWT.
-![AuthenticationResult IdToken](/visual-guides/7.%20authenticationresult.png)
+![AuthenticationResult IdToken](visual-guides/7.%20authenticationresult.png)
 
 ### Test Secured API Gateway Endpoints (using Postman or cURL)
 ```bash
@@ -979,6 +979,6 @@ curl -v -X POST \
 ```
  Expected Behavior: A successful cURL request will show a 200 OK HTTP status code.
 
-![Successful Curl](/visual-guides/7.successful-curl.png)
+![Successful Curl](visual-guides/7.successful-curl.png)
 
-![Product Added to DynamoDB and authorised](/visual-guides/7.successful-dynamo.png)
+![Product Added to DynamoDB and authorised](visual-guides/7.successful-dynamo.png)
