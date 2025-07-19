@@ -1,35 +1,35 @@
 ## Phase 1: DynamoDB Table Creation
 
  - Access DynamoDB Console:
-    - Log in to the AWS Management Console.
-    - Navigate to the DynamoDB service.
+   - Log in to the AWS Management Console.
+   - Navigate to the DynamoDB service.
  - Create Table:
-    - Click *Create table*.
-    - Table name: `ProductsTable`.
-    - Partition key: productId (String).
-    - (Optional) Sort key: category (String).
-    - Table settings: Leave default settings for now (on-demand capacity, no secondary indexes initially).
-    - Click *Create table*.
+   - Click *Create table*.
+   - Table name: `ProductsTable`.
+   - Partition key: productId (String).
+   - (Optional) Sort key: category (String).
+   - Table settings: Leave default settings for now (on-demand capacity, no secondary indexes initially).
+   - Click *Create table*.
 ![Create DynamoDB Table](visual-guides/1.dynamodb-table.png)
 
 ## Phase 2: Lambda Function Creation (Python)
  - Access Lambda Console:
-    - Navigate to the Lambda service in the AWS Management Console.
+   - Navigate to the Lambda service in the AWS Management Console.
 
 ### `createproductfunction` (POST)
+ - Click *Create function*.
+   - Author from scratch: Select this option.
+   - `createproductfunction`
+   - Runtime: Select Python 3.9.
+   - Architecture: x86_64.
+   - Execution role:
+   - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
    - Click *Create function*.
-    - Author from scratch: Select this option.
-        - `createproductfunction`
-    - Runtime: Select Python 3.9.
-    - Architecture: x86_64.
-    - Execution role:
-        - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
-    - Click *Create function*.
 ![Lambda Post Function](visual-guides/2.lambda-post.png)
  - Configure Function Code for each Lambda (Python):
-    - Once the function is created, you'll be on its configuration page.
-    - Scroll down to the "Code source" section.
-    - Replace the default code with the below Python code.
+   - Once the function is created, you'll be on its configuration page.
+   - Scroll down to the "Code source" section.
+   - Replace the default code with the below Python code.
 
 ```python
 import json
@@ -128,19 +128,19 @@ def lambda_handler(event, context):
 
 ### `getproductfunction` (GET)
 
-  - Click *Create function*.
-    - Author from scratch: Select this option.
-        - `getproductfunction`
-    - Runtime: Select Python 3.9.
-    - Architecture: x86_64.
-    - Execution role:
-        - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
-    - Click *Create function*.
+ - Click *Create function*.
+   - Author from scratch: Select this option.
+   - `getproductfunction`
+   - Runtime: Select Python 3.9.
+   - Architecture: x86_64.
+   - Execution role:
+   - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
+   - Click *Create function*.
 ![Lambda Get Code](visual-guides/2.lambda-get.png)
  - Configure Function Code for each Lambda (Python):
-    - Once the function is created, you'll be on its configuration page.
-    - Scroll down to the "Code source" section.
-    - Replace the default code with the below Python code.
+   - Once the function is created, you'll be on its configuration page.
+   - Scroll down to the "Code source" section.
+   - Replace the default code with the below Python code.
 
 ```python
 import json
@@ -225,19 +225,19 @@ def lambda_handler(event, context):
 
 ### `updateproductfunction` (PUT)
 
-  - Click *Create function*.
-    - Author from scratch: Select this option.
-        - `getproductfunction`
-    - Runtime: Select Python 3.9.
-    - Architecture: x86_64.
-    - Execution role:
-        - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
-    - Click *Create function *.
+ - Click *Create function*.
+   - Author from scratch: Select this option.
+   - `getproductfunction`
+   - Runtime: Select Python 3.9.
+   - Architecture: x86_64.
+   - Execution role:
+   - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
+   - Click *Create function *.
 ![Lambda Put Function](visual-guides/2.lambda-put.png)
  - Configure Function Code for each Lambda (Python):
-    - Once the function is created, you'll be on its configuration page.
-    - Scroll down to the "Code source" section.
-    - Replace the default code with the below Python code.
+   - Once the function is created, you'll be on its configuration page.
+   - Scroll down to the "Code source" section.
+   - Replace the default code with the below Python code.
 
 ```python
 
@@ -388,19 +388,19 @@ def lambda_handler(event, context):
 
 ### `deleteproductfunction` (DELETE)
 
-  - Click *Create function*.
-    - Author from scratch: Select this option.
-        - `deleteproductfunction`
-    - Runtime: Select Python 3.9
-    - Architecture: x86_64.
-    - Execution role:
-        - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
-    - Click *Create function*.
+ - Click *Create function*.
+   - Author from scratch: Select this option.
+   - `deleteproductfunction`
+   - Runtime: Select Python 3.9
+   - Architecture: x86_64.
+   - Execution role:
+   - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
+   - Click *Create function*.
 ![Lambda Delete Function](visual-guides/2.lambda-delete.png)
  - Configure Function Code for each Lambda (Python):
-    - Once the function is created, you'll be on its configuration page.
-    - Scroll down to the "Code source" section.
-    - Replace the default code with the below Python code.
+   - Once the function is created, you'll be on its configuration page.
+   - Scroll down to the "Code source" section.
+   - Replace the default code with the below Python code.
 
 ```Python
 import json
@@ -461,177 +461,178 @@ def lambda_handler(event, context):
 
 Modify the execution roles for the Lambda functions.
  - Access IAM Console:
-    - Navigate to the IAM service in the AWS Management Console.
+   - Navigate to the IAM service in the AWS Management Console.
  - Locate Lambda Execution Roles:
-    - Go to "Roles" in the left navigation pane.
+   - Go to "Roles" in the left navigation pane.
 
 ### POST Role
-   - Search for the roles created by Lambda (they typically start with the function name).
-    - Click on the role associated with `createProductFunction`.
+ - Search for the roles created by Lambda (they typically start with the function name).
+   - Click on the role associated with `createProductFunction`.
  - Add DynamoDB Permissions:
-    - On the role summary page, click *Add permissions* -> *Create inline policy*.
-    - Service: Choose "DynamoDB".
-    - Actions:
-        - Under "Write", select PutItem.
-    - Resources:
-        - Select Specific.
-        - Click *Add ARN* under table.
-        - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
-        - Leave indexes ARN blank 
+   - On the role summary page, click *Add permissions* -> *Create inline policy*.
+   - Service: Choose "DynamoDB".
+   - Actions:
+   - Under "Write", select PutItem.
+  - Resources:
+   - Select Specific.
+   - Click *Add ARN* under table.
+   - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
+   - Leave indexes ARN blank 
 ![Post Role](visual-guides/3.post.policy.png)
-    - Click *Review policy*.
-    - Policy name: `createProductFunction`
-    - Click *Create policy*.
+  
+   - Click *Review policy*.
+   - Policy name: `createProductFunction`
+   - Click *Create policy*.
  - Verify CloudWatch Logs Permission:
-    - Ensure AWSLambdaBasicExecutionRole is attached.
+   - Ensure AWSLambdaBasicExecutionRole is attached.
 
 ### Get Role
-   - Search for the roles created by Lambda (they typically start with the function name).
-    - Click on the role associated with `getProductFunction`.
+ - Search for the roles created by Lambda (they typically start with the function name).
+   - Click on the role associated with `getProductFunction`.
  - Add DynamoDB Permissions:
-    - On the role summary page, click *Add permissions* -> *Create inline policy*.
-    - Service: Choose "DynamoDB".
-    - Actions:
-        - Under "Read", select GetItem, Query, Scan.
-    - Resources:
-        - Select Specific.
-        - Click *Add ARN* under table.
-        - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
-        - Leave indexes ARN blank 
+   - On the role summary page, click *Add permissions* -> *Create inline policy*.
+   - Service: Choose "DynamoDB".
+   - Actions:
+   - Under "Read", select GetItem, Query, Scan.
+ - Resources:
+   - Select Specific.
+   - Click *Add ARN* under table.
+   - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
+   - Leave indexes ARN blank 
 ![Get Role](visual-guides/3.get.policy.png)
-    - Click *Review policy*.
-    - Policy name: `getProductfunction`
-    - Click *Create policy*.
+   - Click *Review policy*.
+   - Policy name: `getProductfunction`
+   - Click *Create policy*.
  - Verify CloudWatch Logs Permission:
-    - Ensure AWSLambdaBasicExecutionRole is attached.
+   - Ensure AWSLambdaBasicExecutionRole is attached.
 
 ### Put Role
    - Search for the roles created by Lambda (they typically start with the function name).
-    - Click on the role associated with `updateProductFunction`.
+   - Click on the role associated with `updateProductFunction`.
  - Add DynamoDB Permissions:
-    - On the role summary page, click *Add permissions* -> *Create inline policy*.
-    - Service: Choose "DynamoDB".
-    - Actions:
-        - Under "Write", select UpdateItem.
-    - Resources:
-        - Select Specific.
-        - Click *Add ARN* under table.
-        - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
-        - Leave indexes ARN blank 
+   - On the role summary page, click *Add permissions* -> *Create inline policy*.
+   - Service: Choose "DynamoDB".
+   - Actions:
+   - Under "Write", select UpdateItem.
+   - Resources:
+   - Select Specific.
+   - Click *Add ARN* under table.
+   - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
+   - Leave indexes ARN blank 
 ![Put Role](visual-guides/3.put.policy.png)
-    - Click *Review policy*.
-    - Policy name: `updateProductfunction`
-    - Click *Create policy*.
+   - Click *Review policy*.
+   - Policy name: `updateProductfunction`
+   - Click *Create policy*.
  - Verify CloudWatch Logs Permission:
-    - Ensure AWSLambdaBasicExecutionRole is attached.
+   - Ensure AWSLambdaBasicExecutionRole is attached.
 
 ### Delete Role
    - Search for the roles created by Lambda (they typically start with the function name).
-    - Click on the role associated with `deleteproductfunction`.
+   - Click on the role associated with `deleteproductfunction`.
  - Add DynamoDB Permissions:
-    - On the role summary page, click *Add permissions* -> *Create inline policy*.
-    - Service: Choose "DynamoDB".
-    - Actions:
-        - Under "Write", selecct DeleteItem.
-    - Resources:
-        - Select Specific.
-        - Click *Add ARN* under table.
-        - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
-        - Leave indexes ARN blank 
+   - On the role summary page, click *Add permissions* -> *Create inline policy*.
+   - Service: Choose "DynamoDB".
+   - Actions:
+   - Under "Write", selecct DeleteItem.
+   - Resources:
+   - Select Specific.
+   - Click *Add ARN* under table.
+   - Enter the ARN of the `ProductsTable` (you can find this on the DynamoDB table's "Overview" tab).
+   - Leave indexes ARN blank 
 ![Post Role](visual-guides/3.delete.policy.png)
-    - Click *Review policy*.
-    - Policy name: `getProductfunction`
-    - Click *Create policy*.
+   - Click *Review policy*.
+   - Policy name: `getProductfunction`
+   - Click *Create policy*.
  - Verify CloudWatch Logs Permission:
-    - Ensure AWSLambdaBasicExecutionRole is attached.
+   - Ensure AWSLambdaBasicExecutionRole is attached.
 
 ## Phase 4: API Gateway Creation
 
  - Access API Gateway Console:
-    - Navigate to the API Gateway service.
+   - Navigate to the API Gateway service.
  - Create REST API:
-    - Click *Create API*.
-    - Choose Protocol: "REST API" (choose "Build").
-    - API name: `ProductsAPI`.
-    - Endpoint Type: "Regional".
-    - Click *Create API*.
+   - Click *Create API*.
+   - Choose Protocol: "REST API" (choose "Build").
+   - API name: `ProductsAPI`.
+   - Endpoint Type: "Regional".
+   - Click *Create API*.
 ![Create API](visual-guides/4.create-api.png)
  - Create Resources and Methods:
-    - Create Resource (/products):
-       - From the API Gateway console, select the ProductsAPI.
-       - Under "Resources", click *Actions* -> *Create Resource*.
-       - Resource Name: products
-       - Resource Path: products
-       - Click *Create Resource*.
+   - Create Resource (/products):
+   - From the API Gateway console, select the ProductsAPI.
+   - Under "Resources", click *Actions* -> *Create Resource*.
+   - Resource Name: products
+   - Resource Path: products
+   - Click *Create Resource*.
 ![Create Products](visual-guides/4.create-products.png)
  - Create Method (POST for /products):
-       - Select the /products resource.
-       - Click *Actions* -> *Create Method*.
-       - Select POST from the dropdown.
-       - Integration type: "Lambda Function".
-       - Lambda Region: Select the AWS region.
-       - Lambda Function: Start typing `createProductFunction` and select it.
-       - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
+   - Select the /products resource.
+   - Click *Actions* -> *Create Method*.
+   - Select POST from the dropdown.
+   - Integration type: "Lambda Function".
+   - Lambda Region: Select the AWS region.
+   - Lambda Function: Start typing `createProductFunction` and select it.
+   - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
 ![Create POST Method](visual-guides/4.post-method.png)
  - Create Resource (/{productId} under /products):
-       - Select the /products resource.
-       - Click *Actions* -> "Create Resource".
-       - Resource Name: productId
-       - Resource Path: {productId} (Note the curly braces for path parameter)
-       - Click *Create Resource*.
+   - Select the /products resource.
+   - Click *Actions* -> "Create Resource".
+   - Resource Name: productId
+   - Resource Path: {productId} (Note the curly braces for path parameter)
+   - Click *Create Resource*.
   - Create GET for /{productId}:
-       - Click *Actions* -> *Create Method*.
-       - Select GET from the dropdown.
-       - Integration type: "Lambda Function".
-       - Lambda Region: Select the AWS region.
-       - Lambda Function: Start typing `getProductFunction` and select it.
-       - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
+   - Click *Actions* -> *Create Method*.
+   - Select GET from the dropdown.
+   - Integration type: "Lambda Function".
+   - Lambda Region: Select the AWS region.
+   - Lambda Function: Start typing `getProductFunction` and select it.
+   - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
 ![GET Method](visual-guides/4.get-method.png)
  - Create PUT for /{productId}:
-       - Click *Actions* -> *Create Method*.
-       - Select PUT from the dropdown.
-       - Integration type: "Lambda Function".
-       - Lambda Region: Select the AWS region.
-       - Lambda Function: Start typing `updateProductFunction` and select it.
-       - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
+   - Click *Actions* -> *Create Method*.
+   - Select PUT from the dropdown.
+   - Integration type: "Lambda Function".
+   - Lambda Region: Select the AWS region.
+   - Lambda Function: Start typing `updateProductFunction` and select it.
+   - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
 ![PUT Method](visual-guides/4.put-method.png)
  - Create DELETE for /{productId}:
-       - Click *Actions* -> *Create Method*.
-       - Select DELETE from the dropdown.
-       - Integration type: "Lambda Function".
-       - Lambda Region: Select the AWS region.
-       - Lambda Function: Start typing `deleteProductFunction` and select it.
-       - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
+   - Click *Actions* -> *Create Method*.
+   - Select DELETE from the dropdown.
+   - Integration type: "Lambda Function".
+   - Lambda Region: Select the AWS region.
+   - Lambda Function: Start typing `deleteProductFunction` and select it.
+   - Click *Save*. When prompted, click *OK* to give API Gateway permissions to invoke the Lambda function.
 ![DELETE Method](visual-guides/4.delete-method.png)
 
 ![All Methods](visual-guides/4.created-methods.png)
 
  - Deploy API:
-       - From the API Gateway console, select the ProductsAPI.
-       - Click *Actions* -> *Deploy API*.
-       - Deployment stage: Select [New Stage].
-       - Stage name: dev
-       - Click *Deploy*.
-       - Note down the "Invoke URL" for the API. This is the base URL you will use to test the API.
+   - From the API Gateway console, select the ProductsAPI.
+   - Click *Actions* -> *Deploy API*.
+   - Deployment stage: Select [New Stage].
+   - Stage name: dev
+   - Click *Deploy*.
+   - Note down the "Invoke URL" for the API. This is the base URL you will use to test the API.
 ![Deploy API](visual-guides/4.deploy-api.png)
 
 
 ## Phase 5: Testing and Validation
  
  - Test `createProductFunction`:
-    - In the Lambda console, select `createProductFunction`.
-    - Select "add trigger".
-    - Select "API Gateway".
-    - Select the created API gateway.
-    - Development stage: dev.
-    - Security: IAM.
-    - Click *Add*
+   - In the Lambda console, select `createProductFunction`.
+   - Select "add trigger".
+   - Select "API Gateway".
+   - Select the created API gateway.
+   - Development stage: dev.
+   - Security: IAM.
+   - Click *Add*
 ![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
-    - Click the *Test* tab.
-    - Create new event.
-    - Name: `Put-Item-Test`
-    - Enter the below JSON and click *test*.
+   - Click the *Test* tab.
+   - Create new event.
+   - Name: `Put-Item-Test`
+   - Enter the below JSON and click *test*.
 
 ### POST (Create Products)
 ```JSON       
@@ -683,19 +684,19 @@ Modify the execution roles for the Lambda functions.
 
 
  - Test `updateProductFunction`:
-    - In the Lambda console, select `updateProductFunction`.
-    - Select "add trigger".
-    - Select "API Gateway".
-    - Select the created API gateway.
-    - Development stage: dev.
-    - Security: IAM.
-    - Click *Add*
+   - In the Lambda console, select `updateProductFunction`.
+   - Select "add trigger".
+   - Select "API Gateway".
+   - Select the created API gateway.
+   - Development stage: dev.
+   - Security: IAM.
+   - Click *Add*
 ![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
-    - Click the *Test* tab.
-    - Create new event.
-    - Name: `Put-Item-Test`
-    - Enter the below JSON and click *test*.
+   - Click the *Test* tab.
+   - Create new event.
+   - Name: `Put-Item-Test`
+   - Enter the below JSON and click *test*.
 
 ### PUT (Update Product):
 ```JSON
@@ -711,29 +712,29 @@ Modify the execution roles for the Lambda functions.
   }
 ```
  - If Successful (DynamoDB):
-    - You should have a new entry in the DynamoDB table.
+   - You should have a new entry in the DynamoDB table.
 ![POST Success DynamoDB](visual-guides/5.dynamodb-put-success.png)
-    - You should receive this response.
+   - You should receive this response.
  - If successful (API Gateway):
-    - You should receive a status code `200`.
+   - You should receive a status code `200`.
 ![POST Success API Gateway](visual-guides/5.put-test-success.png)
 
 
 
  - Test `updateProductFunction`:
-    - In the Lambda console, select `updateProductFunction`.
-    - Select "add trigger".
-    - Select "API Gateway".
-    - Select the created API gateway.
-    - Development stage: dev.
-    - Security: IAM.
-    - Click *Add*
+   - In the Lambda console, select `updateProductFunction`.
+   - Select "add trigger".
+   - Select "API Gateway".
+   - Select the created API gateway.
+   - Development stage: dev.
+   - Security: IAM.
+   - Click *Add*
 ![Add Trigger](visual-guides/5.add-trigger.png)
  - Configure a test:
-    - Click the *Test* tab.
-    - Create new event.
-    - Name: `Put-Item-Test`
-    - Enter the below JSON and click *test*.
+   - Click the *Test* tab.
+   - Create new event.
+   - Name: `Put-Item-Test`
+   - Enter the below JSON and click *test*.
 
 ### DELETE (DELETE Product):
 ```JSON
@@ -745,11 +746,11 @@ Modify the execution roles for the Lambda functions.
 }
 ```
  - If Successful (DynamoDB):
-    - You should have a new entry in the DynamoDB table.
+   - You should have a new entry in the DynamoDB table.
 ![POST Success DynamoDB](visual-guides/5.dynamodb-delete-success.png)
-    - You should receive this response.
+   - You should receive this response.
  - If successful (API Gateway):
-    - You should receive a status code `200`.
+   - You should receive a status code `200`.
 ![POST Success API Gateway](visual-guides/5.delete-test-success.png)
 
 
@@ -761,11 +762,11 @@ Observe the responses and check CloudWatch logs for any errors or successful exe
 
 CloudWatch logging is automatically configured when you create a Lambda function with basic permissions.
 - Access CloudWatch Console:
-    - Navigate to the CloudWatch service.
+   - Navigate to the CloudWatch service.
  - View Lambda Logs:
-    - In the left navigation pane, under "Logs", click "Log groups".
-    - You will see log groups for the Lambda functions (e.g., /aws/lambda/`createproductfunction`).
-    - Click on a log group to see the log streams, which contain the output from the Lambda function's executions (including print statements or errors).
+   - In the left navigation pane, under "Logs", click "Log groups".
+   - You will see log groups for the Lambda functions (e.g., /aws/lambda/`createproductfunction`).
+   - Click on a log group to see the log streams, which contain the output from the Lambda function's executions (including print statements or errors).
 ![CloudWatch Logs](visual-guides/6.cloudwatch-logs.png)
 
 
@@ -775,54 +776,54 @@ This phase significantly enhances the "Secure" aspect of the project by integrat
 
 - Log in to the AWS Management Console and navigate to the Cognito service.
   - Create a New User Pool:
-    - Click Create user pool.
-    - Select "Single-page application"
-    - Name: `ProductsWebAppClient`.
-    - Configure Options: Select Username.
-    - Required attributes: email .
+   - Click Create user pool.
+   - Select "Single-page application"
+   - Name: `ProductsWebAppClient`.
+   - Configure Options: Select Username.
+   - Required attributes: email .
 ![Create User Pool](visual-guides/7.create-user-pools.png)
  - Return to Cognito and select the newly created user pool.
-    - Click *Rename*.
-    - Name: `secure-serverless-app` 
-    - Click *Save changes*
+   - Click *Rename*.
+   - Name: `secure-serverless-app` 
+   - Click *Save changes*
  - Enable password auth.
-    - Select App clients.
-    - Select MyProducts App.
-    - Click *edit*.
-    - Enable "Sign in with username and password: ALLOW_USER_PASSWORD_AUTH"
-    - Click *Save changes*
+   - Select App clients.
+   - Select MyProducts App.
+   - Click *edit*.
+   - Enable "Sign in with username and password: ALLOW_USER_PASSWORD_AUTH"
+   - Click *Save changes*
 [Enable Password Auth](visual-guides/7.enable-password-auth.png)
 
  - Integrate Cognito with API Gateway
-  - Create a Cognito Authorizer:
-    - In the API Gateway console, navigate to the ProductsAPI.
-    - In the left navigation pane, select Authorizers.
-    - Click *Create new authorizer*.
-    - Name: Enter `CognitoUserAuth`.
-    - Type: Select "Cognito."
-    - Cognito User Pool: Select the user pool created in the previous step from the dropdown.
-    - Token Source: Enter Authorization.
-    - Click *Create*.
+   - Create a Cognito Authorizer:
+   - In the API Gateway console, navigate to the ProductsAPI.
+   - In the left navigation pane, select Authorizers.
+   - Click *Create new authorizer*.
+   - Name: Enter `CognitoUserAuth`.
+   - Type: Select "Cognito."
+   - Cognito User Pool: Select the user pool created in the previous step from the dropdown.
+   - Token Source: Enter Authorization.
+   - Click *Create*.
 ![Create Authoriser](visual-guides/7.authoriser.png)
-   Apply Authorizer to API Methods:
-    - Select the POST method on /products.
-    - Click on *Method Request*.
-    - For "Authorization," select the CognitoUserAuth authorizer.
-    - Click *save*.
+ - Apply Authorizer to API Methods:
+   - Select the POST method on /products.
+   - Click on *Method Request*.
+   - For "Authorization," select the CognitoUserAuth authorizer.
+   - Click *save*.
 ![Authoriser POST](visual-guides/7.authoriser-post.png)
    
    Deploy API:
-    - In API Gateway, navigate to Resources.
-    - From the "Actions" dropdown, select Deploy API.
-    - Choose the existing deployment stage and confirm to overwrite.
-    - Click *Deploy*.
-    - Record the Invoke URL for the API Gateway stage.
+   - In API Gateway, navigate to Resources.
+   - From the "Actions" dropdown, select Deploy API.
+   - Choose the existing deployment stage and confirm to overwrite.
+   - Click *Deploy*.
+   - Record the Invoke URL for the API Gateway stage.
 
  - Modify Lambda Functions to Process Authenticated Requests.
-  - Access the Lambda Console:
-    - Navigate to the Lambda functions createproductfunction.
-  - Update Lambda Function Code:
-    - In the "Code source" section of the Lambda function, amend to the below code.
+   - Access the Lambda Console:
+   -  Navigate to the Lambda functions createproductfunction.
+ - Update Lambda Function Code:
+   - In the "Code source" section of the Lambda function, amend to the below code.
 
 ```python
 import json
