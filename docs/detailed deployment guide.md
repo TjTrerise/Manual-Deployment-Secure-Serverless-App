@@ -21,7 +21,7 @@
     - Author from scratch: Select this option.
         - `createproductfunction`
     - Runtime: Select Python 3.9
-    - Architecture: Leave as x86_64.
+    - Architecture: x86_64.
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
     - Click *Create function*.
