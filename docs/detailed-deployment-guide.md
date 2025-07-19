@@ -20,7 +20,7 @@
    - Click *Create function*.
     - Author from scratch: Select this option.
         - `createproductfunction`
-    - Runtime: Select Python 3.9
+    - Runtime: Select Python 3.9.
     - Architecture: x86_64.
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
@@ -131,7 +131,7 @@ def lambda_handler(event, context):
   - Click *Create function*.
     - Author from scratch: Select this option.
         - `getproductfunction`
-    - Runtime: Select Python 3.9
+    - Runtime: Select Python 3.9.
     - Architecture: x86_64.
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
@@ -228,7 +228,7 @@ def lambda_handler(event, context):
   - Click *Create function*.
     - Author from scratch: Select this option.
         - `getproductfunction`
-    - Runtime: Select Python 3.9
+    - Runtime: Select Python 3.9.
     - Architecture: x86_64.
     - Execution role:
         - Select "Create a new role with basic Lambda permissions". This will create a basic role that allows Lambda to write logs to CloudWatch.
@@ -771,7 +771,7 @@ CloudWatch logging is automatically configured when you create a Lambda function
 
 ## Phase 7: Add Cognito for User Authentication
 
-This phase significantly enhances the "Secure" aspect of the project by integrating user authentication. By the end of this phase, only authenticated users will be able to interact with the API Gateway and, consequently, the DynamoDB table.
+This phase significantly enhances the "Secure" aspect of the project by integrating user authentication.
 
 - Log in to the AWS Management Console and navigate to the Cognito service.
   - Create a New User Pool:
@@ -958,7 +958,7 @@ To bypass email verification for testing, use admin-confirm-sign-up:
  - The output will contain an AuthenticationResult. Copy the value of IdToken. This is the JWT.
 ![AuthenticationResult IdToken](visual-guides/7.%20authenticationresult.png)
 
-### Test Secured API Gateway Endpoints (using Postman or cURL)
+### Test Secured API Gateway Endpoints (cURL)
 ```bash
  - Use the copied IdToken to make requests to the API.
     - On the AWS CLI paste the below. Amend for your specifc tokens.
