@@ -33,7 +33,7 @@ Tools:
 ### Prerequisites 
 * An active AWS Account.
 * AWS CLI installed and configured with appropriate credentials.
-* 
+
 ### Deployment Steps
 
 1. DynamoDB Table Creation: Set up the `ProductsTable` in DynamoDB.
