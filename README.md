@@ -13,8 +13,7 @@ This project outlines the deployment of a secure, serverless CRUD (Create, Read,
 * API Exposure: Exposes RESTful API endpoints via Amazon API Gateway.
 * User Authentication: Implements secure user authentication for API access using Amazon Cognito.
 * Monitoring & Logging: Integrates with AWS CloudWatch for comprehensive logging and monitoring of API and Lambda function performance.
-* test
-* 
+
 ## Technologies Used
 AWS Services:
  - Amazon DynamoDB: NoSQL database for flexible and scalable data storage.
